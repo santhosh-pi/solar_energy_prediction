@@ -54,6 +54,38 @@ plt.ylabel("Specific Energy (kWh/kWp)")
 plt.legend()
 plt.show()
 
+# Additional EDA
+# Scatter plot of radiation vs energy
+plt.figure(figsize=(10, 5))
+sns.scatterplot(x='Shortwave Radiation (W/m^2)', y='Specific Energy (kWh/kWp)', data=merged_data)
+plt.title("Shortwave Radiation vs Specific Energy")
+plt.xlabel("Shortwave Radiation (W/m^2)")
+plt.ylabel("Specific Energy (kWh/kWp)")
+plt.show()
+
+# Boxplot of energy by cloud cover levels
+plt.figure(figsize=(12, 6))
+sns.boxplot(x=pd.qcut(merged_data['Cloud Cover (%)'], q=4), y='Specific Energy (kWh/kWp)', data=merged_data)
+plt.title("Specific Energy by Cloud Cover Quartiles")
+plt.xlabel("Cloud Cover Quartiles")
+plt.ylabel("Specific Energy (kWh/kWp)")
+plt.show()
+
+# Pairplot for selected features
+selected_features_for_eda = ['Specific Energy (kWh/kWp)', 'Shortwave Radiation (W/m^2)', 'Temperature (\u00b0C)', 'Relative Humidity (%)', 'Cloud Cover (%)']
+sns.pairplot(merged_data[selected_features_for_eda])
+plt.suptitle("Pairplot of Selected Features", y=1.02)
+plt.show()
+
+# Boxplot of Specific Energy by Temperature Ranges
+plt.figure(figsize=(12, 6))
+merged_data['Temperature Range'] = pd.cut(merged_data['Temperature (\u00b0C)'], bins=[-10, 0, 10, 20, 30, 40], labels=['<0', '0-10', '10-20', '20-30', '30-40'])
+sns.boxplot(x='Temperature Range', y='Specific Energy (kWh/kWp)', data=merged_data)
+plt.title("Specific Energy by Temperature Ranges")
+plt.xlabel("Temperature Range (\u00b0C)")
+plt.ylabel("Specific Energy (kWh/kWp)")
+plt.show()
+
 # Feature Selection
 X = merged_data[['Shortwave Radiation (W/m^2)', 'Direct Radiation (W/m^2)', 'Diffuse Radiation (W/m^2)',
                  'Temperature (\u00b0C)', 'Relative Humidity (%)', 'Cloud Cover (%)',
