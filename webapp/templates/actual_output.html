@@ -1,0 +1,10 @@
+<!-- Actual Output Page -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Upload Actual Solar Output</h2>
+<form method="post" enctype="multipart/form-data">
+    <input type="text" name="pv_serial" placeholder="PV Serial Number" required>
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}

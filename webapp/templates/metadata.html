@@ -1,0 +1,36 @@
+<!-- Metadata Page -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Manage Metadata</h2>
+<form method="post">
+    <input type="text" name="plant_name" placeholder="Plant Name" required>
+    <input type="text" name="location" placeholder="Location" required>
+    <input type="text" name="latitude" placeholder="Latitude" required>
+    <input type="text" name="longitude" placeholder="Longitude" required>
+    <input type="number" name="installed_power" placeholder="Installed Power (kWp)" required>
+    <input type="number" name="connection_power" placeholder="Connection Power (kWn)" required>
+    <button type="submit">Add Metadata</button>
+</form>
+<table>
+    <tr>
+        <th>Plant Name</th>
+        <th>Location</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Installed Power (kWp)</th>
+        <th>Connection Power (kWn)</th>
+        <th>Delete</th>
+    </tr>
+    {% for item in metadata %}
+    <tr>
+        <td>{{ item.plant_name }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.latitude }}</td>
+        <td>{{ item.longitude }}</td>
+        <td>{{ item.installed_power }}</td>
+        <td>{{ item.connection_power }}</td>
+        <td><a href="{{ url_for('delete_metadata', id=item._id) }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
