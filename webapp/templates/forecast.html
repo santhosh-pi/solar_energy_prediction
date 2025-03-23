@@ -2,14 +2,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Solar Energy Forecast</h2>
-<form method="post">
+<!-- <form method="post">
     <input type="date" name="start_date" required>
     <input type="date" name="end_date" required>
     <input type="text" name="plant_name" placeholder="PV Serial Number" required>
     <input type="submit" name="submit" value ="Fetch & Predict"/>
-</form>
+</form>-->
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="text" name="plant_name" placeholder="PV Serial Number" required>
     <input type="file" name="file">
     <input type="submit" name="submit" value ="Upload & Predict"/>
@@ -20,12 +20,14 @@
         <th>Plant Name</th>
         <th>Date</th>
         <th>Total Solar Energy (in KWh)</th>
+        <th>Timestamp</th>
     </tr>
     {% for item in solardata %}
     <tr>
         <td>{{ item.plant_name }}</td>
         <td>{{ item.Date }}</td>
         <td>{{ item.Total_Solar_Energy }}</td>
+        <td>{{ item.Timestamp }}</td>
     </tr>
     {% endfor %}
 </table>
